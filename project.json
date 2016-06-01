@@ -1,0 +1,23 @@
+{
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+  "dependencies": {
+    "Microsoft.NETCore.DotNetHostPolicy": "1.0.1-rc2-*",
+    "Microsoft.NETCore.Runtime.CoreCLR": "1.0.2-rc4-*",
+    "System.Console": "4.0.0-rc4-*",
+    "System.Runtime": "4.1.0-rc4-*",
+    "System.ValueTuple": "4.0.0-rc4-*"
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
+    }
+  },
+  "runtimes": {
+    "win10-x64": {}
+  }
+}

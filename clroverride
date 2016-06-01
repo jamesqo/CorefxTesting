@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+buildtype=Windows_NT.x64.Release
+coreclr_gitrepo=~/Code/git/coreclr
+
+config=Release
+framework=netcoreapp1.0
+rid=win10-x64
+
+while getopts ':b:c:f:g:r:' opt
+do
+    case "$opt" in
+        b) buildtype=$OPTARG ;;
+        c) config=$OPTARG ;;
+        f) framework=$OPTARG ;;
+        g) coreclr_gitrepo=$OPTARG ;;
+        r) rid=$OPTARG ;;
+        :) echo "The option -$OPTARG requires an argument" >&2; exit 1 ;;
+        '?') echo "Invalid option: -$OPTARG" >&2; exit 1 ;;
+    esac
+done
+
+scriptdir=$(dirname "$0")
+cd -P "$scriptdir"
+
+coreclr_bins=$coreclr_gitrepo/bin/Product/$buildtype
+publish_path=bin/$config/$framework/$rid/publish
+
+# Do the copying (finally)
+exec cp -rT "$coreclr_bins" "$publish_path" 

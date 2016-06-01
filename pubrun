@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+config=Release
+framework=netcoreapp1.0
+rid=win10-x64
+
+while getopts ':c:f:r:' opt
+do
+    case "$opt" in
+        c) config=$OPTARG ;;
+        f) framework=$OPTARG ;;
+        r) rid=$OPTARG ;;
+        :) echo "The option -$OPTARG requires an argument" >&2; exit 1 ;;
+        '?') echo "Invalid option: -$OPTARG" >&2; exit 1 ;;
+    esac
+done
+
+# Change the forwarded args to those not parsed by getopts
+shift $((OPTIND - 1))
+
+scriptdir=$(dirname "$0")
+cd -P "$scriptdir/bin/$config/$framework/$rid/publish"
+
+# Exec the program forwarding the arguments
+exec ./CorefxTesting.exe "$@"
